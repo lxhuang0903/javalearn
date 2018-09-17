@@ -1,0 +1,18 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.yc.grpc.item";
+
+service ItemService {
+  // search all item
+  rpc searchAllItems (Empty) returns (stream ItemDTO) {}
+}
+
+message Empty {
+
+}
+
+message ItemDTO {
+    int64 itemId = 1;
+    string itemName = 2;
+}
+
