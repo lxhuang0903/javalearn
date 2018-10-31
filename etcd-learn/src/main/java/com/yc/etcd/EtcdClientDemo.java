@@ -1,6 +1,11 @@
 package com.yc.etcd;
 
-import java.lang.reflect.Field;
+import com.coreos.jetcd.Client;
+import com.coreos.jetcd.KV;
+import com.coreos.jetcd.data.ByteSequence;
+import com.coreos.jetcd.kv.GetResponse;
+
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -10,31 +15,21 @@ import java.util.concurrent.ExecutionException;
  * @date: 2018/9/4
  */
 public class EtcdClientDemo {
-    public static void main(String[] args) throws ExecutionException, InterruptedException, NoSuchFieldException {
-//        Client client = Client.builder().endpoints("http://localhost:2379").build();
-//        KV kvClient = client.getKVClient();
-//
-//        ByteSequence key = ByteSequence.fromString("message1");
-//        ByteSequence value = ByteSequence.fromString("test_value");
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Client client = Client.builder().endpoints("http://localhost:2379").build();
+        KV kvClient = client.getKVClient();
 
-// put the key-value
-//        kvClient.put(key, value);
+        ByteSequence key = ByteSequence.fromString("message1");
+        ByteSequence value = ByteSequence.fromString("test_value");
 
-// get the CompletableFuture
-//        CompletableFuture<GetResponse> getFuture = kvClient.get(key);
+        kvClient.put(key, value);
 
-// get the value from CompletableFuture
-//        GetResponse response = getFuture.get();
-//        System.out.println(response.getKvs().size());
-//        System.out.println(response.getKvs());
-//        System.out.println(response.toString());
-// delete the key
-//        kvClient.delete(key).get();
+        CompletableFuture<GetResponse> getFuture = kvClient.get(key);
 
+        GetResponse response = getFuture.get();
 
-        Class<Demo> clazz = Demo.class;
-        for (Field field : clazz.getDeclaredFields()) {
-            System.out.println(field.getGenericType());
-        }
+        System.out.println(response.getKvs().size());
+        System.out.println(response.getKvs());
+        System.out.println(response.toString());
     }
 }

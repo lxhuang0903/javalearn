@@ -39,7 +39,7 @@ public class HelloWorldClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        HelloWorldClient client = new HelloWorldClient("localhost", 50005);
+        HelloWorldClient client = new HelloWorldClient("172.16.71.4", 50005);
         try {
             System.out.println(client.great("world"));
         } finally {
