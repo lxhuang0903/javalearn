@@ -12,6 +12,7 @@
         <module>grpc-learn</module>
         <module>etcd-learn</module>
         <module>jmh-learn</module>
+        <module>guava-learn</module>
     </modules>
 
     <properties>
